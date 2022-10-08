@@ -170,7 +170,6 @@ int main()
 {
     telephoneDirectory a(3, 5);
     a.insert("1", "", "", "");
-    // a.display();
     a.insert("2", "", "", "");
     // a.insert("345", "","","");
     // a.insert("345", "","","");
