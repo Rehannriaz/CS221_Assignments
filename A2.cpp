@@ -1,8 +1,7 @@
 
 
-
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
 
 class telephoneDirectory
@@ -46,45 +45,66 @@ public:
         listHeadPtr = NULL;
     }
 
-    void insert(string phoneNum = "", string ownerName_ = "", string addres_ = "", string email_ = "")
+    Node* setInfo()
+    {
+        Node *temp=new Node;
+        cout<<"Enter Phone Number: ";
+        cin>>temp->phoneNumber;
+        cout<<"Enter Owner Name: ";
+        cin>>temp->ownerName;
+        cout<<"Enter address: ";
+        cin>>temp->address;
+        cout<<"Enter Email: ";
+        cin>>temp->email;
+
+        return temp;
+    }
+
+    void insert()
     {
         userCounter++;
         if (userCounter > rows * cols)
         {
-            cout << "\nReached Maximum limit of users : " << rows * cols;
+            cout << "\nReached Maximum limit of users : " << rows * cols << endl;
             return;
         }
-        Node *curr = new Node;
-        curr->phoneNumber = phoneNum;
-        curr->ownerName = ownerName_;
-        curr->address = addres_;
-        curr->email = email_;
+
+        Node *curr = setInfo();
+        // curr->phoneNumber = phoneNum;
+        // curr->ownerName = ownerName_;
+        // curr->address = addres_;
+        // curr->email = email_;
 
         Node *ptrTemp = listHeadPtr;
         if (listHeadPtr == NULL)
         {
+            colsCounter++;
             listHeadPtr = curr;
             cout << "Node Inserted\n";
             return;
         }
 
 
-        for (int i = 1; i < rowCounter; i++) // THIS IS CALLED EVEN THO 6th node is not created
-            ptrTemp = ptrTemp->bot;
+        if (rowCounter > 1)
+            while (ptrTemp->bot != NULL)
+                ptrTemp = ptrTemp->bot;
 
-        while (ptrTemp->next != NULL)
-            ptrTemp = ptrTemp->next;
+        if (colsCounter > 1)
+            while (ptrTemp->next != NULL)
+                ptrTemp = ptrTemp->next;
 
-        if (colsCounter <= cols)
+        colsCounter++;
+        if (colsCounter <= cols && colsCounter != 1)
         {
+
             ptrTemp->next = curr;
             curr->prev = ptrTemp;
         }
-        colsCounter++;
         if (colsCounter == cols)
         {
             colsCounter = 0;
             rowCounter++;
+            cout << "Node Inserted\n";
             return;
         }
         if (rowCounter > 1)
@@ -113,7 +133,8 @@ public:
 
     void printList(int row_ = 1)
     {
-        counterDisplay = 0;
+        if (row_ == 1)
+            counterDisplay = 0;
         if (row_ > rowCounter)
             return;
 
@@ -132,13 +153,14 @@ public:
         printList(row_);
     }
 
-    Node *search(string phNum, int row_ = 1)
+    // SEARCH FOR DUPLICATESSSSS
+    Node *search(string ownerName_, int row_ = 1)
     {
 
         if (row_ > rowCounter)
         {
             cout << "\nPhone Number Not FOUND\n";
-            Node *temp;
+            Node *temp = NULL;
             return temp;
         }
 
@@ -146,40 +168,89 @@ public:
         for (int i = 1; i < row_; i++)
             ptrTemp = ptrTemp->bot;
 
-        while (ptrTemp->next != NULL)
+        while (ptrTemp != NULL)
         {
-            if (ptrTemp->next->phoneNumber == phNum)
-                return ptrTemp->next;
-
-            ptrTemp = ptrTemp->next;
+            if (ptrTemp->ownerName == ownerName_)
+                return ptrTemp;
+            if (ptrTemp->next != NULL)
+                ptrTemp = ptrTemp->next;
+            else
+                break;
         }
         row_++;
-        search(phNum, row_);
-        // return ptrTemp;
+        return search(ownerName_, row_);
+
+        // return temp;
     }
 
     void displaySpecific(Node *ptrTemp)
     {
-        // cout<<"Owner Name :"<< ptrTemp->ownerName<<"\n";
-        cout << "Phone Number :" << ptrTemp->phoneNumber << "\n";
-        // cout<<"Address :"<< ptrTemp->address<<"\n";
-        // cout<<"email :"<< ptrTemp->email<<"\n";
+        if (ptrTemp != NULL)
+        {
+            cout << "Owner Name :" << ptrTemp->ownerName << "\n";
+            cout << "Phone Number :" << ptrTemp->phoneNumber << "\n";
+            cout << "Address :" << ptrTemp->address << "\n";
+            cout << "email :" << ptrTemp->email << "\n";
+        }
+    }
+
+
+    void deleteNode()
+    {
+
     }
 };
+
+void menu()
+{
+    cout << "(1)Insert a Phone Number \n";
+    cout << "(2)Delete an existing phone Number from the system \n";
+    cout << "(3)Search an Owner's Name and display the details \n";
+    cout << "(4)Display Entire Phone Directory\n\n";
+
+    cout << setw(50) << "Enter the menu you would like to enter or enter -1 to exit:";
+}
+
+
 int main()
 {
-    telephoneDirectory a(3, 5);
-    a.insert("1", "", "", "");
-    a.insert("2", "", "", "");
-    // a.insert("345", "","","");
-    // a.insert("345", "","","");
-    a.insert("3", "", "", "");
-    // a.insert("3", "heasdllo", "nig", "cat");
-    a.insert("4", "", "", "");
-    a.insert("5", "", "", "");
-    a.insert("6", "", "", "");
-    // a.insert("6", "hello", "nig", "cat");
-    a.printList();
-    // a.displaySpecific(a.search("10"));
-    // a.printList();
-}
+
+    int rows = 3, int cols = 5;
+    int select_menu;
+    cout << "Enter Number of Rows and Columns\n";
+    cin >> rows >> cols;
+    telephoneDirectory A(rows, cols);
+    menu();
+    cin >> select_menu;
+    do
+    {
+        switch (select_menu)
+        {
+        case 1:
+            cout << endl;
+            A.insert();
+            cout << endl;
+            break;
+        case 2:
+            cout << endl;
+            A.deleteNode();
+            cout << endl;
+            break;
+        case 3:
+            cout << endl;
+            A.displaySpecific()
+            cout << endl;
+            break;
+        case 4:
+
+            break;
+        case -1:
+            system("CLS");
+            cout << "Program Exiting...\n\n";
+            exit(1);
+        default:
+            cout << setw(50) << "Invalid Input...Try Again: \n";
+        }
+        menu();
+        cin >> select_menu;
+    } while (1);
