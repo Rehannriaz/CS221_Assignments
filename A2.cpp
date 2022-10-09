@@ -77,14 +77,12 @@ public:
         if (userCounter > rows * cols)
         {
             cout << "\nReached Maximum limit of users : " << rows * cols << endl;
+            userCounter--;
             return;
         }
 
         Node *curr = setInfo();
-        // curr->phoneNumber = phoneNum;
-        // curr->ownerName = ownerName_;
-        // curr->address = addres_;
-        // curr->email = email_;
+
 
         Node *ptrTemp = listHeadPtr;
         if (listHeadPtr == NULL)
@@ -222,7 +220,8 @@ public:
             cout << "Phone Number does not exist in the directory";
             return;
         }
-        userCounter-=2;
+        // userCounter-=2;
+        userCounter--;
         if (temp->next != NULL)
             temp = temp->next;
         else
