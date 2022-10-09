@@ -195,9 +195,15 @@ public:
     }
 
 
-    void deleteNode()
+    void deleteNode(string ownerName_)
     {
-
+        Node *temp=search(ownerName_);
+        if(temp==NULL)
+        {
+            cout<<"Phone Number does not exist in the directory";
+            return;
+        }
+        
     }
 };
 
@@ -242,7 +248,6 @@ int main()
             cout << endl;
             break;
         case 4:
-
             break;
         case -1:
             system("CLS");
