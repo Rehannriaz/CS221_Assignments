@@ -1,5 +1,3 @@
-
-
 #include <iostream>
 #include <iomanip>
 using namespace std;
@@ -230,7 +228,7 @@ int main()
     cin >> select_menu;
     do
     {
-        switch (select_menu)
+        switch(select_menu)
         {
         case 1:
             cout << endl;
@@ -238,13 +236,17 @@ int main()
             cout << endl;
             break;
         case 2:
-            cout << endl;
-            A.deleteNode();
+            string ownerName_;
+            cout<<"\n Enter an Owner's Name you would like to Delete: ";
+            cin>>ownerName_;
+            A.deleteNode(ownerName_);
             cout << endl;
             break;
         case 3:
-            cout << endl;
-            A.displaySpecific()
+            string ownerName_;
+            cout<<"\n Enter an Owner's Name you would like to search: ";
+            cin>>ownerName_;
+            A.displaySpecific(A.search(ownerName_));
             cout << endl;
             break;
         case 4:
@@ -259,3 +261,4 @@ int main()
         menu();
         cin >> select_menu;
     } while (1);
+}
