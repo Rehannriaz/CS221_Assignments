@@ -1,5 +1,17 @@
+/**
+ * @file A2.cpp
+ * @author your name (you@domain.com)
+ * @brief
+ * @version 0.1
+ * @date 2022-10-09
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
 #include <iostream>
 #include <iomanip>
+#include <string>
 using namespace std;
 
 class telephoneDirectory
@@ -47,13 +59,14 @@ public:
     {
         Node *temp = new Node;
         cout << "Enter Phone Number: ";
-        cin >> temp->phoneNumber;
+        cin.ignore();
+        getline(cin, temp->phoneNumber);
         cout << "Enter Owner Name: ";
-        cin >> temp->ownerName;
+        getline(cin, temp->ownerName);
         cout << "Enter address: ";
-        cin >> temp->address;
+        getline(cin, temp->address);
         cout << "Enter Email: ";
-        cin >> temp->email;
+        getline(cin, temp->email);
 
         return temp;
     }
@@ -144,6 +157,8 @@ public:
             counterDisplay++;
             cout << "User No." << counterDisplay << endl;
             displaySpecific(ptrTemp);
+            cout << endl
+                 << endl;
             ptrTemp = ptrTemp->next;
         }
         row_++;
@@ -151,7 +166,7 @@ public:
     }
 
     // SEARCH FOR DUPLICATESSSSS
-    Node *search(string ownerName_, int row_ = 1)
+    Node *search(string data, int row_ = 1)
     {
 
         if (row_ > rowCounter)
@@ -167,7 +182,7 @@ public:
 
         while (ptrTemp != NULL)
         {
-            if (ptrTemp->ownerName == ownerName_)
+            if (ptrTemp->ownerName == data || ptrTemp->email == data || ptrTemp->address == data)
                 return ptrTemp;
             if (ptrTemp->next != NULL)
                 ptrTemp = ptrTemp->next;
@@ -175,7 +190,7 @@ public:
                 break;
         }
         row_++;
-        return search(ownerName_, row_);
+        return search(data, row_);
 
         // return temp;
     }
@@ -191,6 +206,14 @@ public:
         }
     }
 
+    void setNode(Node *temp1, Node *temp2)
+    {
+        temp1->address = temp2->address;
+        temp1->phoneNumber = temp2->phoneNumber;
+        temp1->email = temp2->email;
+        temp1->ownerName = temp2->ownerName;
+    }
+
     void deleteNode(string ownerName_)
     {
         Node *temp = search(ownerName_);
@@ -199,6 +222,30 @@ public:
             cout << "Phone Number does not exist in the directory";
             return;
         }
+        userCounter-=2;
+        if (temp->next != NULL)
+            temp = temp->next;
+        else
+        {
+            Node *temp2 = temp->prev;
+            temp2->next = NULL;
+            delete temp;
+            cout << "node deleted\n";
+            return;
+        }
+        while (temp != NULL)
+        {
+
+            setNode(temp->prev, temp);
+            if (temp->next != NULL)
+                temp = temp->next;
+            else
+                break;
+        }
+        Node *temp2 = temp->prev;
+        temp2->next = NULL;
+        delete temp;
+        cout << "node deleted\n";
     }
 };
 
@@ -214,10 +261,9 @@ void menu()
 
 int main()
 {
-
-    int rows = 3, int cols = 5;
+    int rows = 3, cols = 5;
     int select_menu;
-    cout << "Enter Number of Rows and Columns\n";
+    cout << "Enter Number of Rows and Columns: ";
     cin >> rows >> cols;
     telephoneDirectory A(rows, cols);
     menu();
@@ -235,18 +281,30 @@ int main()
         case 2:
 
             cout << "\n Enter an Owner's Name you would like to Delete: ";
-            cin >> ownerName_;
+            cin.ignore();
+            getline(cin, ownerName_);
+            system("CLS");
             A.deleteNode(ownerName_);
             cout << endl;
+            system("pause");
             break;
         case 3:
 
-            cout << "\n Enter an Owner's Name you would like to search: ";
-            cin >> ownerName_;
+            cout << "\n Enter an Owner's Name, Email or Address you would like to search: ";
+            cin.ignore();
+            getline(cin, ownerName_);
+            system("CLS");
             A.displaySpecific(A.search(ownerName_));
-            cout << endl;
+            cout << endl
+                 << endl;
+            system("pause");
             break;
         case 4:
+            system("CLS");
+            A.printList();
+            cout << endl
+                 << endl;
+            system("pause");
             break;
         case -1:
             system("CLS");
