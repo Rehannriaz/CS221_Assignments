@@ -43,17 +43,17 @@ public:
         listHeadPtr = NULL;
     }
 
-    Node* setInfo()
+    Node *setInfo()
     {
-        Node *temp=new Node;
-        cout<<"Enter Phone Number: ";
-        cin>>temp->phoneNumber;
-        cout<<"Enter Owner Name: ";
-        cin>>temp->ownerName;
-        cout<<"Enter address: ";
-        cin>>temp->address;
-        cout<<"Enter Email: ";
-        cin>>temp->email;
+        Node *temp = new Node;
+        cout << "Enter Phone Number: ";
+        cin >> temp->phoneNumber;
+        cout << "Enter Owner Name: ";
+        cin >> temp->ownerName;
+        cout << "Enter address: ";
+        cin >> temp->address;
+        cout << "Enter Email: ";
+        cin >> temp->email;
 
         return temp;
     }
@@ -81,7 +81,6 @@ public:
             cout << "Node Inserted\n";
             return;
         }
-
 
         if (rowCounter > 1)
             while (ptrTemp->bot != NULL)
@@ -192,16 +191,14 @@ public:
         }
     }
 
-
     void deleteNode(string ownerName_)
     {
-        Node *temp=search(ownerName_);
-        if(temp==NULL)
+        Node *temp = search(ownerName_);
+        if (temp == NULL)
         {
-            cout<<"Phone Number does not exist in the directory";
+            cout << "Phone Number does not exist in the directory";
             return;
         }
-        
     }
 };
 
@@ -215,7 +212,6 @@ void menu()
     cout << setw(50) << "Enter the menu you would like to enter or enter -1 to exit:";
 }
 
-
 int main()
 {
 
@@ -228,7 +224,8 @@ int main()
     cin >> select_menu;
     do
     {
-        switch(select_menu)
+        string ownerName_;
+        switch (select_menu)
         {
         case 1:
             cout << endl;
@@ -236,16 +233,16 @@ int main()
             cout << endl;
             break;
         case 2:
-            string ownerName_;
-            cout<<"\n Enter an Owner's Name you would like to Delete: ";
-            cin>>ownerName_;
+
+            cout << "\n Enter an Owner's Name you would like to Delete: ";
+            cin >> ownerName_;
             A.deleteNode(ownerName_);
             cout << endl;
             break;
         case 3:
-            string ownerName_;
-            cout<<"\n Enter an Owner's Name you would like to search: ";
-            cin>>ownerName_;
+
+            cout << "\n Enter an Owner's Name you would like to search: ";
+            cin >> ownerName_;
             A.displaySpecific(A.search(ownerName_));
             cout << endl;
             break;

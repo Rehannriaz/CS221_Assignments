@@ -2,8 +2,6 @@
  * @file A1_2021438_2021051.cpp
  * @author Rehan Riaz, GTA
  * @brief 4 way linked list
- * @version 0.1
- * @date 2022-10-04
  *
  * @copyright Copyright (c) 2022
  *
