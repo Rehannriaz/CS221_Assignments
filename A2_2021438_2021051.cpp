@@ -1,10 +1,7 @@
 /**
- * @file A2.cpp
- * @author your name (you@domain.com)
- * @brief
- * @version 0.1
- * @date 2022-10-09
- *
+ * @file A2_2021438_2021051.cpp
+ * @author Muhammad Rehan, Adeen Amir
+ * @brief 4 Way Linked List Assignment 1
  * @copyright Copyright (c) 2022
  *
  */
@@ -14,6 +11,10 @@
 #include <string>
 using namespace std;
 
+/**
+ * @brief Telephone Directory class
+ *
+ */
 class telephoneDirectory
 {
 private:
@@ -27,6 +28,10 @@ private:
         Node *next, *prev, *top, *bot;
         int rowNo, colNo;
 
+        /**
+         * @brief Construct a new Node object
+         *
+         */
         Node()
         {
             rowNo = 0;
@@ -47,6 +52,12 @@ private:
     Node *listHeadPtr;
 
 public:
+    /**
+     * @brief Construct a new telephone Directory object
+     *
+     * @param row amount of rows in the linked list
+     * @param col amount of columns in the linked list
+     */
     telephoneDirectory(int row = 3, int col = 5)
     {
         this->rows = row;
@@ -58,7 +69,12 @@ public:
         userCounter = 0;
         listHeadPtr = NULL;
     }
-
+    ~telephoneDirectory() {}
+    /**
+     * @brief sets the information in the node and returns the node back to the Insert Function
+     *
+     * @return Node*
+     */
     Node *setInfo()
     {
         Node *temp = new Node;
@@ -81,6 +97,11 @@ public:
         return temp;
     }
 
+    /**
+     * @brief inserts the Node at the specific point in a linked list by traversing it until columns
+     *        if columns exceed then data is added into the 2nd row and so on.
+     *
+     */
     void insert()
     {
         userCounter++;
@@ -130,14 +151,12 @@ public:
             if (colsCounter == 1)
             {
                 ptrTemp = listHeadPtr;
-                // curr->prev=NULL;
-                // curr->next=NULL;
+
                 while (ptrTemp->bot != NULL)
                     ptrTemp = ptrTemp->bot;
 
                 ptrTemp->bot = curr;
                 curr->top = ptrTemp;
-                // return;
             }
             else
             {
@@ -149,6 +168,13 @@ public:
         cout << "Node Inserted\n";
     }
 
+    /**
+     * @brief Recursive function called for printing each row
+     *        prints the list by printing the columns first and then goes down one row
+     *        and then prints the next column and so on
+     *
+     * @param row_ takes the rowNumber and prints out all the columns in that specific row
+     */
     void printList(int row_ = 1)
     {
         if (row_ == 1)
@@ -159,7 +185,7 @@ public:
         Node *ptrTemp = listHeadPtr;
         for (int i = 1; i < row_; i++)
             ptrTemp = ptrTemp->bot;
-        //   ptrTemp=listHeadPtr;
+
         while (ptrTemp != NULL)
         {
             counterDisplay++;
@@ -173,10 +199,16 @@ public:
         printList(row_);
     }
 
-    // SEARCH FOR DUPLICATESSSSS
-    Node *search(string data, int row_ = 1)
+    /**
+     * @brief Recursively called by incrementing the row_ Number everytime an entire row is printed
+     *        Searches every node throughout the Linked list by checking the data sent by user and comparing
+     *        it with each node
+     *
+     * @param data takes data from search
+     * @return Node*
+     */
+    Node *recursiveSearch(string data, int row_ = 1)
     {
-
         if (row_ > rowCounter)
         {
             cout << "\nPhone Number Not FOUND\n";
@@ -198,11 +230,25 @@ public:
                 break;
         }
         row_++;
-        return search(data, row_);
-
-        // return temp;
+        return recursiveSearch(data, row_);
     }
 
+    /**
+     * @brief calls the RecursiveSearch function and sends data in it
+     *
+     * @param data takes in data of any kind, OwnerName, email, Address
+     * @return Node* returns the node recieved from the recursiveSearch(data)
+     */
+    Node *search(string data)
+    {
+        return recursiveSearch(data);
+    }
+
+    /**
+     * @brief Displays a Specific Node's data in a good readable format
+     *
+     * @param ptrTemp takes in any Node's data you would like to display
+     */
     void displaySpecific(Node *ptrTemp)
     {
         if (ptrTemp != NULL)
@@ -213,7 +259,13 @@ public:
             cout << "email :" << ptrTemp->email << "\n";
         }
     }
-
+    /**
+     * @brief Sets temp2->DATA into temp1->DATA
+     *        replacing all the data of temp1 by temp2
+     *        used in deletion
+     * @param temp1
+     * @param temp2
+     */
     void setNode(Node *temp1, Node *temp2)
     {
         temp1->address = temp2->address;
@@ -223,97 +275,13 @@ public:
     }
 
     /**
-     * @brief cols-1 amount of prev
-     *        and then 1 bottom
-     *         OR
-     *          trav->bot to temp
+     * @brief An ownerName is taken in from the user and is first searched through the linkedlist
+     *        if it doesnt exist the it returns with an error
+     *        if it does exists it switches the data from temp->next to temp and so on
+     *        working for all number of rows
      *
      * @param ownerName_
      */
-    // void deleteNode(string ownerName_)
-    // {
-    //     Node *temp = search(ownerName_);
-    //     if (temp == NULL)
-    //     {
-    //         cout << "Phone Number does not exist in the directory";
-    //         return;
-    //     }
-
-    //     Node *temp2;
-    //     userCounter--;
-    //     if (temp->next != NULL)
-    //         temp = temp->next;
-    //     else
-    //     {
-    //         temp2 = temp->prev;
-    //         temp2->next = NULL;
-    //         delete temp;
-    //         cout << "node deleted\n";
-    //         return;
-    //     }
-    //     while (temp->rowNo != rowCounter && temp->colNo != colsCounter)
-    //     {
-
-    //         setNode(temp->prev, temp);
-    //         if (temp->next != NULL)
-    //         {
-    //             temp = temp->next;
-    //             temp2 = temp->prev;
-    //         }
-    //         else
-    //         {
-    //             Node *trav = listHeadPtr;
-    //             for (int i = 1; i <= temp->rowNo; i++)
-    //                 trav = trav->bot;
-    //             setNode(temp, trav);
-    //             temp = trav->next;
-    //             // temp2 = trav;
-    //         }
-
-    //         // return;
-    //     }
-
-    //     temp2->next = NULL;
-    //     delete temp;
-    //     // colsCounter--;
-    //     // if(colsCounter==0)
-    //     // {
-    //     //     colsCounter=cols;
-    //     //     rowCounter--;
-    //     // }
-
-    //     cout << "node deleted\n";
-    // }
-    // void deleteNode(string ownerName_)
-    // {
-    //     Node *temp = search(ownerName_);
-    //     if (temp == NULL)
-    //     {
-    //         cout << "Phone Number does not exist in the directory";
-    //         return;
-    //     }
-    //     Node *lastNode = search(lastOwnerName);
-    //     if (lastNode->prev != NULL)
-    //     {
-    //         lastOwnerName = lastNode->prev->ownerName;
-    //         lastNode->prev->next = NULL;
-    //         setNode(temp, lastNode);
-    //         delete lastNode;
-    //     }
-    //     else
-    //     {
-    //         setNode(temp,lastNode);
-    //         Node *tempLastNode=lastNode;
-    //         lastNode = lastNode->top;
-    //         while (lastNode->next != NULL)
-    //             lastNode = lastNode->next;
-    //         lastOwnerName = lastNode->ownerName;
-
-    //         delete tempLastNode;
-    //     }
-
-    //     cout << "Node Deleted\n";
-    // }
     void deleteNode(string ownerName_)
     {
         Node *temp = search(ownerName_);
@@ -322,7 +290,7 @@ public:
             cout << "Phone Number does not exist in the directory";
             return;
         }
-        userCounter-=2;
+        userCounter -= 2;
         if (temp->next != NULL)
             temp = temp->next;
         else
@@ -348,7 +316,10 @@ public:
         cout << "node deleted\n";
     }
 };
-
+/**
+ * @brief Tidy Menu for displaying in int main()
+ *
+ */
 void menu()
 {
     cout << "(1)Insert a Phone Number \n";
@@ -359,6 +330,11 @@ void menu()
     cout << setw(50) << "Enter the menu you would like to enter or enter -1 to exit:";
 }
 
+/**
+ * @brief Class called in int main with a functional menu displayed
+ *
+ *
+ */
 int main()
 {
     int rows = 3, cols = 5;
