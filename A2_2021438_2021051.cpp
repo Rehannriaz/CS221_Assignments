@@ -25,9 +25,12 @@ private:
     {
         string ownerName, address, email, phoneNumber;
         Node *next, *prev, *top, *bot;
+        int rowNo, colNo;
 
         Node()
         {
+            rowNo = 0;
+            colNo = 0;
             next = NULL;
             prev = NULL;
             top = NULL;
@@ -36,6 +39,7 @@ private:
         }
         ~Node() {}
     };
+    string lastOwnerName;
     int rows, cols;
     int counterDisplay;
     int userCounter;
@@ -50,7 +54,7 @@ public:
         this->counterDisplay = 0;
         rowCounter = 1;
         colsCounter = 0;
-
+        lastOwnerName = "";
         userCounter = 0;
         listHeadPtr = NULL;
     }
@@ -58,6 +62,12 @@ public:
     Node *setInfo()
     {
         Node *temp = new Node;
+        temp->rowNo = rowCounter;
+        // if(colsCounter==0)
+        temp->colNo = colsCounter + 1;
+        // else
+        // temp->colNo = colsCounter;
+
         cout << "Enter Phone Number: ";
         cin.ignore();
         getline(cin, temp->phoneNumber);
@@ -67,7 +77,7 @@ public:
         getline(cin, temp->address);
         cout << "Enter Email: ";
         getline(cin, temp->email);
-
+        lastOwnerName = temp->ownerName;
         return temp;
     }
 
@@ -82,7 +92,6 @@ public:
         }
 
         Node *curr = setInfo();
-
 
         Node *ptrTemp = listHeadPtr;
         if (listHeadPtr == NULL)
@@ -112,6 +121,7 @@ public:
         {
             colsCounter = 0;
             rowCounter++;
+
             cout << "Node Inserted\n";
             return;
         }
@@ -212,6 +222,98 @@ public:
         temp1->ownerName = temp2->ownerName;
     }
 
+    /**
+     * @brief cols-1 amount of prev
+     *        and then 1 bottom
+     *         OR
+     *          trav->bot to temp
+     *
+     * @param ownerName_
+     */
+    // void deleteNode(string ownerName_)
+    // {
+    //     Node *temp = search(ownerName_);
+    //     if (temp == NULL)
+    //     {
+    //         cout << "Phone Number does not exist in the directory";
+    //         return;
+    //     }
+
+    //     Node *temp2;
+    //     userCounter--;
+    //     if (temp->next != NULL)
+    //         temp = temp->next;
+    //     else
+    //     {
+    //         temp2 = temp->prev;
+    //         temp2->next = NULL;
+    //         delete temp;
+    //         cout << "node deleted\n";
+    //         return;
+    //     }
+    //     while (temp->rowNo != rowCounter && temp->colNo != colsCounter)
+    //     {
+
+    //         setNode(temp->prev, temp);
+    //         if (temp->next != NULL)
+    //         {
+    //             temp = temp->next;
+    //             temp2 = temp->prev;
+    //         }
+    //         else
+    //         {
+    //             Node *trav = listHeadPtr;
+    //             for (int i = 1; i <= temp->rowNo; i++)
+    //                 trav = trav->bot;
+    //             setNode(temp, trav);
+    //             temp = trav->next;
+    //             // temp2 = trav;
+    //         }
+
+    //         // return;
+    //     }
+
+    //     temp2->next = NULL;
+    //     delete temp;
+    //     // colsCounter--;
+    //     // if(colsCounter==0)
+    //     // {
+    //     //     colsCounter=cols;
+    //     //     rowCounter--;
+    //     // }
+
+    //     cout << "node deleted\n";
+    // }
+    // void deleteNode(string ownerName_)
+    // {
+    //     Node *temp = search(ownerName_);
+    //     if (temp == NULL)
+    //     {
+    //         cout << "Phone Number does not exist in the directory";
+    //         return;
+    //     }
+    //     Node *lastNode = search(lastOwnerName);
+    //     if (lastNode->prev != NULL)
+    //     {
+    //         lastOwnerName = lastNode->prev->ownerName;
+    //         lastNode->prev->next = NULL;
+    //         setNode(temp, lastNode);
+    //         delete lastNode;
+    //     }
+    //     else
+    //     {
+    //         setNode(temp,lastNode);
+    //         Node *tempLastNode=lastNode;
+    //         lastNode = lastNode->top;
+    //         while (lastNode->next != NULL)
+    //             lastNode = lastNode->next;
+    //         lastOwnerName = lastNode->ownerName;
+
+    //         delete tempLastNode;
+    //     }
+
+    //     cout << "Node Deleted\n";
+    // }
     void deleteNode(string ownerName_)
     {
         Node *temp = search(ownerName_);
@@ -220,8 +322,7 @@ public:
             cout << "Phone Number does not exist in the directory";
             return;
         }
-        // userCounter-=2;
-        userCounter--;
+        userCounter-=2;
         if (temp->next != NULL)
             temp = temp->next;
         else
