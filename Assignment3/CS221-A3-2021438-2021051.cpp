@@ -152,6 +152,7 @@ public:
             else
             {
                 temp->counter++;
+                system("CLS");
                 cout << "dupe value\n";
                 break;
             }
@@ -180,7 +181,10 @@ public:
     void remove(int num)
     {
         if (searchBinaryTree(num))
+        {
             removeNode(num, root);
+            cout<<"Node Deleted\n";
+        }
         else
             cout << "Number does Not Exist\n";
     }
@@ -194,7 +198,7 @@ void menu()
     cout << "(4)Display Pre-Order Traversal\n";
     cout << "(5)Display In-Order Traversal\n";
     cout << "(6)Display Post-Order Traversal\n\n";
-    cout << setw(50) << "Enter the menu you would like to enter or enter -1 to exit:";
+    cout << setw(50) << "Enter the menu you would like to enter or -1 to exit:";
 }
 
 int main()
@@ -202,9 +206,9 @@ int main()
     int input;
     menu();
     cin >> input;
+    binaryTree a;
     do
     {
-        binaryTree a;
         int num;
         switch (input)
         {
@@ -236,16 +240,19 @@ int main()
             system("CLS");
             a.showNodesPreOrder();
             cout << endl;
+            system("pause");
             break;
         case 5:
             system("CLS");
             a.showNodesInOrder();
             cout << endl;
+            system("pause");
             break;
         case 6:
             system("CLS");
             a.showNodesPostOrder();
             cout << endl;
+            system("pause");
             break;
         case -1:
             break;

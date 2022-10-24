@@ -1,9 +1,26 @@
+/**
+ * @file CS221-A2-2021438-2021051.cpp
+ * @author Muhammad Rehan, Adeen Amir
+ * @brief 
+ * @version 0.1
+ * @date 2022-10-23
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
 #include <iostream>
 #include <string>
 #include <math.h>
+#include <iomanip>
 
 using namespace std;
 
+
+/**
+ * @brief template class of Stack
+ * 
+ */
 template <class T>
 class stack
 {
@@ -13,6 +30,10 @@ protected:
     int top;
 
 public:
+/**
+ * @brief Construct a new stack object
+ * 
+ */
     stack()
     {
         top = -1;
@@ -20,12 +41,22 @@ public:
         arr = new T[size];
         clear(arr, size);
     }
-
+/**
+ * @brief sets all the values to 0 in a stack
+ * 
+ * @param arr 
+ * @param size 
+ */
     void clear(T *arr, int size)
     {
         for (int i = 0; i < size; i++)
             arr[i] = 0;
     }
+    /**
+     * @brief pushesback a T datatype into the stack
+     * 
+     * @param op 
+     */
     void pushBack(T op)
     {
         T *arr2 = new T[++size];
@@ -37,8 +68,24 @@ public:
         arr2[++top] = op;
         arr = arr2;
     }
+    /**
+     * @brief true if stack is empty, false if it is not empty
+     * 
+     * @return true 
+     * @return false 
+     */
     bool isEmpty() { return (top == -1) ? true : false; }
+    /**
+     * @brief returns top value in the stack without popping it
+     * 
+     * @return arr[top] 
+     */
     T topValue() { return arr[top]; }
+    /**
+     * @brief pops the very last data pushed into the stack
+     * 
+     * @return T 
+     */
     T popBack()
     {
         if (isEmpty())
@@ -56,6 +103,10 @@ public:
     }
 };
 
+/*
+ * @brief class for PostFix
+ * 
+ */
 class Post : public stack<char>, public stack<float>
 {
 private:
@@ -65,13 +116,39 @@ private:
     string result;
 
 public:
+/**
+ * @brief Construct a new Post object
+ * 
+ */
     Post() : stack<char>(), stack<float>()
     {
-        cout << "Enter an expression\n";
-        getline(cin,exp);
+        answer = 0;
+        exp = "";
         result = "";
     }
+    /**
+     * @brief Set the expression in the class
+     * 
+     * @param expression 
+     */
+    void setExp(string expression)
+    {
+        exp="";
+        this->exp = expression;
+    }
+    void clear()
+    {
+        answer=0;
+        exp="";
+        result="";
+    }
 
+/**
+ * @brief precedence for each operator 
+ * 
+ * @param c 
+ * @return int 
+ */
     int precedence(char c)
     {
         if (c == '^')
@@ -83,7 +160,10 @@ public:
         else
             return -1;
     }
-
+/**
+ * @brief prints the result ignoring spaces
+ * 
+ */
     void print()
     {
         for (int i = 0; i < result.length(); i++)
@@ -91,6 +171,11 @@ public:
                 cout << result[i];
         cout << endl;
     }
+/**
+ * @brief Calculates the postfix expression giving an answer if its not an algebric expression
+ * 
+ */
+
     void postFixCalc()
     {
         if (result == "")
@@ -164,27 +249,67 @@ public:
         answer = num.topValue();
         cout << "Answer = " << answer << endl;
     }
+    /**
+     * @brief addition of two numbers
+     * 
+     * @param A 
+     * @param B 
+     * @return float 
+     */
     float addition(float A, float B)
     {
         return A + B;
     }
+    /**
+     * @brief subtraction of two numbers
+     * 
+     * @param A 
+     * @param B 
+     * @return float 
+     */
     float subtraction(float A, float B)
     {
         return A - B;
     }
+    /**
+     * @brief multiplication of two numbers
+     * 
+     * @param A 
+     * @param B 
+     * @return float 
+     */
     float multiplication(float A, float B)
     {
         return A * B;
     }
+    /**
+     * @brief division of two numbers
+     * 
+     * @param A 
+     * @param B 
+     * @return float 
+     */
     float division(float A, float B)
     {
         return A / B;
     }
+    /**
+     * @brief power of two numbers
+     * 
+     * @param A 
+     * @param B 
+     * @return float 
+     */
     float power(float A, float B)
     {
         return pow(A, B);
     }
 
+
+/**
+ * @brief converts the expression into postFix
+ * 
+ */
     void postFix()
     {
         string temp = "";
@@ -201,7 +326,7 @@ public:
             if ((exp[i] >= 65 && exp[i] <= 90) || (exp[i] >= 97 && exp[i] <= 122) || (exp[i] >= 48 && exp[i] <= 57))
             {
                 int j = i;
-                while (precedence(exp[j]) == -1 && exp[j] != ')' && exp[j]!='\0')
+                while (precedence(exp[j]) == -1 && exp[j] != ')' && exp[j] != '\0')
                 {
                     result += exp[j];
                     j++;
@@ -250,10 +375,57 @@ public:
     }
 };
 
+/**
+ * @brief menu
+ * 
+ */
+void menu()
+{
+    cout << "(1)Input An Expression\n";
+    cout << "(2)Convert Expression to PostFix and print result\n";
+    cout << "(3)Calculate input Equation\n\n";
+    cout << setw(50) << "Enter the menu you would like to enter or -1 to exit:";
+}
+
 int main()
 {
+    int input;
+    menu();
+    cin >> input;
     Post a;
-    a.postFix();
-    a.print();
-    a.postFixCalc();
+    do
+    {
+        string exp="";
+        switch (input)
+        {
+        case 1:
+            system("CLS");
+            a.clear();
+            cout << "Enter an expression\n";
+            cin.ignore();
+            getline(cin, exp);
+            a.setExp(exp);
+            cout << "Expression Noted" << endl;
+            break;
+
+        case 2:
+            system("CLS");
+            a.postFix();
+            a.print();
+            cout << endl;
+            break;
+        case 3:
+            system("CLS");
+            a.postFixCalc();
+            cout << endl;
+            break;
+        case -1:
+            break;
+        default:
+            cout << "Invalid Input\n";
+            break;
+        }
+        menu();
+        cin >> input;
+    } while (input != -1);
 }
