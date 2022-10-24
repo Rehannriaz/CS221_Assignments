@@ -1,12 +1,12 @@
 /**
  * @file CS221-A2-2021438-2021051.cpp
  * @author Muhammad Rehan, Adeen Amir
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-10-23
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include <iostream>
@@ -16,10 +16,9 @@
 
 using namespace std;
 
-
 /**
  * @brief template class of Stack
- * 
+ *
  */
 template <class T>
 class stack
@@ -30,10 +29,10 @@ protected:
     int top;
 
 public:
-/**
- * @brief Construct a new stack object
- * 
- */
+    /**
+     * @brief Construct a new stack object
+     *
+     */
     stack()
     {
         top = -1;
@@ -41,12 +40,12 @@ public:
         arr = new T[size];
         clear(arr, size);
     }
-/**
- * @brief sets all the values to 0 in a stack
- * 
- * @param arr 
- * @param size 
- */
+    /**
+     * @brief sets all the values to 0 in a stack
+     *
+     * @param arr
+     * @param size
+     */
     void clear(T *arr, int size)
     {
         for (int i = 0; i < size; i++)
@@ -54,8 +53,8 @@ public:
     }
     /**
      * @brief pushesback a T datatype into the stack
-     * 
-     * @param op 
+     *
+     * @param op
      */
     void pushBack(T op)
     {
@@ -70,21 +69,21 @@ public:
     }
     /**
      * @brief true if stack is empty, false if it is not empty
-     * 
-     * @return true 
-     * @return false 
+     *
+     * @return true
+     * @return false
      */
     bool isEmpty() { return (top == -1) ? true : false; }
     /**
      * @brief returns top value in the stack without popping it
-     * 
-     * @return arr[top] 
+     *
+     * @return arr[top]
      */
     T topValue() { return arr[top]; }
     /**
      * @brief pops the very last data pushed into the stack
-     * 
-     * @return T 
+     *
+     * @return T
      */
     T popBack()
     {
@@ -105,7 +104,7 @@ public:
 
 /*
  * @brief class for PostFix
- * 
+ *
  */
 class Post : public stack<char>, public stack<float>
 {
@@ -116,10 +115,10 @@ private:
     string result;
 
 public:
-/**
- * @brief Construct a new Post object
- * 
- */
+    /**
+     * @brief Construct a new Post object
+     *
+     */
     Post() : stack<char>(), stack<float>()
     {
         answer = 0;
@@ -128,27 +127,27 @@ public:
     }
     /**
      * @brief Set the expression in the class
-     * 
-     * @param expression 
+     *
+     * @param expression
      */
     void setExp(string expression)
     {
-        exp="";
+        exp = "";
         this->exp = expression;
     }
     void clear()
     {
-        answer=0;
-        exp="";
-        result="";
+        answer = 0;
+        exp = "";
+        result = "";
     }
 
-/**
- * @brief precedence for each operator 
- * 
- * @param c 
- * @return int 
- */
+    /**
+     * @brief precedence for each operator
+     *
+     * @param c
+     * @return int
+     */
     int precedence(char c)
     {
         if (c == '^')
@@ -160,10 +159,10 @@ public:
         else
             return -1;
     }
-/**
- * @brief prints the result ignoring spaces
- * 
- */
+    /**
+     * @brief prints the result ignoring spaces
+     *
+     */
     void print()
     {
         for (int i = 0; i < result.length(); i++)
@@ -171,10 +170,10 @@ public:
                 cout << result[i];
         cout << endl;
     }
-/**
- * @brief Calculates the postfix expression giving an answer if its not an algebric expression
- * 
- */
+    /**
+     * @brief Calculates the postfix expression giving an answer if its not an algebric expression
+     *
+     */
 
     void postFixCalc()
     {
@@ -251,65 +250,49 @@ public:
     }
     /**
      * @brief addition of two numbers
-     * 
-     * @param A 
-     * @param B 
-     * @return float 
+     *
+     * @param A
+     * @param B
+     * @return float
      */
-    float addition(float A, float B)
-    {
-        return A + B;
-    }
+    float addition(float A, float B) { return A + B; }
     /**
      * @brief subtraction of two numbers
-     * 
-     * @param A 
-     * @param B 
-     * @return float 
+     *
+     * @param A
+     * @param B
+     * @return float
      */
-    float subtraction(float A, float B)
-    {
-        return A - B;
-    }
+    float subtraction(float A, float B) { return A - B; }
     /**
      * @brief multiplication of two numbers
-     * 
-     * @param A 
-     * @param B 
-     * @return float 
+     *
+     * @param A
+     * @param B
+     * @return float
      */
-    float multiplication(float A, float B)
-    {
-        return A * B;
-    }
+    float multiplication(float A, float B) { return A * B; }
     /**
      * @brief division of two numbers
-     * 
-     * @param A 
-     * @param B 
-     * @return float 
+     *
+     * @param A
+     * @param B
+     * @return float
      */
-    float division(float A, float B)
-    {
-        return A / B;
-    }
+    float division(float A, float B) { return A / B; }
     /**
      * @brief power of two numbers
-     * 
-     * @param A 
-     * @param B 
-     * @return float 
+     *
+     * @param A
+     * @param B
+     * @return float
      */
-    float power(float A, float B)
-    {
-        return pow(A, B);
-    }
+    float power(float A, float B) { return pow(A, B); }
 
-
-/**
- * @brief converts the expression into postFix
- * 
- */
+    /**
+     * @brief converts the expression into postFix
+     *
+     */
     void postFix()
     {
         string temp = "";
@@ -377,7 +360,7 @@ public:
 
 /**
  * @brief menu
- * 
+ *
  */
 void menu()
 {
@@ -395,7 +378,7 @@ int main()
     Post a;
     do
     {
-        string exp="";
+        string exp = "";
         switch (input)
         {
         case 1:
