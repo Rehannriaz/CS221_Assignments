@@ -18,6 +18,10 @@
         "xstring": "cpp",
         "xutility": "cpp",
         "type_traits": "cpp",
-        "string": "cpp"
+        "string": "cpp",
+        "map": "cpp",
+        "memory": "cpp",
+        "set": "cpp",
+        "xtree": "cpp"
     }
 }

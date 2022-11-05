@@ -159,6 +159,7 @@ public:
         else
             return -1;
     }
+
     /**
      * @brief prints the result ignoring spaces
      *
@@ -170,6 +171,7 @@ public:
                 cout << result[i];
         cout << endl;
     }
+
     /**
      * @brief Calculates the postfix expression giving an answer if its not an algebric expression
      *
@@ -199,10 +201,7 @@ public:
                 int j = i;
                 string temp = "";
                 while (result[j] != ' ')
-                {
-                    temp += result[j];
-                    j++;
-                }
+                    temp += result[j++];
 
                 num.pushBack(float(stoi(temp)));
                 i = j;
@@ -248,6 +247,7 @@ public:
         answer = num.topValue();
         cout << "Answer = " << answer << endl;
     }
+
     /**
      * @brief addition of two numbers
      *
@@ -256,6 +256,7 @@ public:
      * @return float
      */
     float addition(float A, float B) { return A + B; }
+
     /**
      * @brief subtraction of two numbers
      *
@@ -264,6 +265,7 @@ public:
      * @return float
      */
     float subtraction(float A, float B) { return A - B; }
+
     /**
      * @brief multiplication of two numbers
      *
@@ -272,6 +274,7 @@ public:
      * @return float
      */
     float multiplication(float A, float B) { return A * B; }
+
     /**
      * @brief division of two numbers
      *
@@ -280,6 +283,7 @@ public:
      * @return float
      */
     float division(float A, float B) { return A / B; }
+
     /**
      * @brief power of two numbers
      *

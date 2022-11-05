@@ -109,10 +109,8 @@ private:
     }
 
 public:
-    binaryTree()
-    {
-        root = NULL;
-    }
+    binaryTree() { root = NULL; }
+    
     void insertNode(int val)
     {
         treeNode *curr, *temp;
@@ -145,7 +143,7 @@ public:
                     temp = temp->right;
                 else
                 {
-                    temp->right = curr;                   
+                    temp->right = curr;
                     break;
                 }
             }
@@ -183,7 +181,7 @@ public:
         if (searchBinaryTree(num))
         {
             removeNode(num, root);
-            cout<<"Node Deleted\n";
+            cout << "Node Deleted\n";
         }
         else
             cout << "Number does Not Exist\n";
@@ -216,7 +214,7 @@ int main()
             cout << "Enter a number you want to insert: ";
             cin >> num;
             a.insertNode(num);
-            cout <<"Node Inserted"<< endl;
+            cout << "Node Inserted" << endl;
             break;
 
         case 2:
