@@ -54,4 +54,30 @@ public:
         }
         return trav->endOfWord;
     }
+    void search2(string key)
+    {
+        bool check = true;
+        Trie *trav = root;
+        string temp = "";
+        for (int i = 0; i < key.length(); i++)
+        {
+            int index = key[i] - 'a';
+            if (!trav->children[index])
+            {
+                cout << temp << endl;
+                temp = "";
+                check = false;
+            }
+            temp += key[i];
+            if (check)
+                trav = trav->children[index];
+            else
+            {
+                trav = root;
+                check = true;
+                trav = trav->children[index];
+            }
+        }
+        // return trav->endOfWord;
+    }
 };

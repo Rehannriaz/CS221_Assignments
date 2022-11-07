@@ -13,7 +13,6 @@ public:
         rows = R;
         cols = 20;
         Words = a;
-
     }
 
     void insertion(string Word)
@@ -33,20 +32,18 @@ public:
         string temp2 = "";
         for (int i = 0; i < vecArr.size(); i++)
         {
-            for (int j = 0; i < vecArr[i].size(); j++)
+            for (int j = 0; j < vecArr[i].size(); j++)
             {
                 temp += vecArr[i][j];
                 if (Words.search(temp))
                 {
                     cout << temp << " ";
-                    temp2 = temp;
+                    // temp2 = temp;
                     temp = "";
                 }
-                else if (Words.search(temp2))
+                else if (j % 3 == 0)
                 {
-                    cout << temp2 << " ";
-                    temp = temp2;
-                    temp2 = "";
+                    temp = "";
                 }
             }
         }
@@ -57,9 +54,11 @@ int main()
 {
     TrieClass a;
     fileInput iFile(a);
-    charArr b(a, 10);
-    b.insertion("dogxbxxxnoon");
-    // b.insertion("zones");
-    b.insertion("rhellotherex");
-    b.compareWord();
+    // charArr b(a, 10);
+    // // b.insertion("dogxbxxxnoon");
+    // // // b.insertion("zones");
+    // // b.insertion("rhellotherex");
+    // a.search("rhellotherex");
+    // // b.compareWord();
+    a.search2("dogxbxxxnoon");
 }

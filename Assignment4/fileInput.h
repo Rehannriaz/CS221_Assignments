@@ -17,7 +17,7 @@ public:
 
         while (getline(iFile, data))
         {
-            if (data.size() > 1)
+            if (data.size() > 2)
                 a.insertion(data);
             
         }
