@@ -60,5 +60,6 @@ int main()
     // // b.insertion("rhellotherex");
     // a.search("rhellotherex");
     // // b.compareWord();
+    // cout << a.search("toy");
     a.search2("dogxbxxxnoon");
 }

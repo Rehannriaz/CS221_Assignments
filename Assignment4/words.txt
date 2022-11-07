@@ -1121,8 +1121,6 @@ breakdown
 breakfast
 breaking
 breaks
-breast
-breasts
 breath
 breathing
 breed
@@ -1719,8 +1717,6 @@ coastal
 coat
 coated
 coating
-cock
-cocks
 cod
 code
 codes
@@ -2543,7 +2539,6 @@ diana
 diane
 diary
 dice
-dick
 dicke
 dicks
 dictionaries
@@ -3684,13 +3679,6 @@ frost
 frozen
 fruit
 fruits
-fs
-ft
-ftp
-fu
-fuck
-fucked
-fucking
 fuel
 fuji
 fujitsu
@@ -6010,7 +5998,6 @@ nick
 nickel
 nickname
 nicole
-niger
 nigeria
 night
 nightlife
@@ -6518,7 +6505,6 @@ pending
 penetration
 penguin
 peninsula
-penis
 penn
 pennsylvania
 penny
@@ -6784,7 +6770,6 @@ populations
 por
 porcelain
 pork
-porn
 porno
 porsche
 port
@@ -7128,7 +7113,6 @@ pursuit
 push
 pushed
 pushing
-pussy
 put
 puts
 putting
@@ -8036,7 +8020,6 @@ several
 severe
 sewing
 sex
-sexcam
 sexo
 sexual
 sexuality
@@ -9451,7 +9434,6 @@ vacation
 vacations
 vaccine
 vacuum
-vagina
 val
 valentine
 valid
@@ -9930,10 +9912,8 @@ xhtml
 xi
 xl
 xml
-xnxx
 xp
 xx
-xxx
 y
 ya
 yacht

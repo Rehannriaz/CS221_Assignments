@@ -58,24 +58,39 @@ public:
     {
         bool check = true;
         Trie *trav = root;
+        // Trie *travPrev = NULL;
         string temp = "";
         for (int i = 0; i < key.length(); i++)
         {
             int index = key[i] - 'a';
             if (!trav->children[index])
             {
-                cout << temp << endl;
-                temp = "";
                 check = false;
             }
-            temp += key[i];
+            if (!trav->endOfWord)
+            {
+                temp="";
+            }
             if (check)
+            {
+
+                temp += key[i];
+                // travPrev = trav;
                 trav = trav->children[index];
+            }
             else
             {
-                trav = root;
                 check = true;
-                trav = trav->children[index];
+
+                if (trav->endOfWord)
+                    cout << temp << " ";
+                temp = "";
+                temp += key[i];
+                // travPrev = trav;
+                // what if the word after it also exists?
+                trav = root;
+                if (trav->children[index])
+                    trav = trav->children[index];
             }
         }
         // return trav->endOfWord;
