@@ -60,12 +60,14 @@ public:
         Trie *trav = root;
         // Trie *travPrev = NULL;
         string temp = "";
+        // static int j=0;
         for (int i = 0; i < key.length(); i++)
         {
             int index = key[i] - 'a';
             if (!trav->children[index])
             {
                 check = false;
+                // j++;
             }
             if (!trav->endOfWord)
             {
@@ -93,6 +95,8 @@ public:
                     trav = trav->children[index];
             }
         }
+        cout << temp << " ";
+        // dogxbxxxnoon
         // return trav->endOfWord;
     }
 };

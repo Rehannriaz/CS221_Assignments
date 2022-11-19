@@ -55,11 +55,10 @@ int main()
     TrieClass a;
     fileInput iFile(a);
     // charArr b(a, 10);
-    // // b.insertion("dogxbxxxnoon");
+    a.search2("dogxbxxxnoon");
+    cout << endl;
     // // // b.insertion("zones");
-    // // b.insertion("rhellotherex");
+    a.search2("rhellotherex");
     // a.search("rhellotherex");
     // // b.compareWord();
-    // cout << a.search("toy");
-    a.search2("dogxbxxxnoon");
 }
